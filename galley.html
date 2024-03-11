@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Div Creation with Delay and Random Background Color</title>
+    <style>
+      /* Some basic styling for the created divs */
+      .created-div {
+        width: 200px;
+        height: 200px;
+        background-color: #ccc;
+        margin: 5px;
+        float: left;
+        opacity: 0;
+        transition: opacity 0.5s ease; /* CSS transition for fading effect */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Button to trigger the creation of divs -->
+    <button  onclick="createMultipleDivsWithFadeAndColor()" id="createDivsButton">Create Divs</button>
+
+    <script>
+      // Function to create a single div with fade effect and random background color
+      function createDivWithFadeAndColor() {
+        var div = document.createElement("div"); // Create a div element
+        div.className = "created-div"; // Assign a class for styling
+        var randomColor =
+          "#" + Math.floor(Math.random() * 16777215).toString(16); // Generate random color
+        div.style.backgroundColor = randomColor; // Apply random color to the div
+        document.body.appendChild(div); // Append the div to the body
+        setTimeout(function () {
+          div.style.opacity = "1"; // Fade in the newly created div
+        }); // Add a slight delay for the fade effect
+      }
+
+      // Function to create multiple divs one by one with fade effect and random background color
+      function createMultipleDivsWithFadeAndColor() {
+        var numberOfDivs = 49; // Number of divs to create
+        var index = 0;
+        var interval = setInterval(function () {
+          if (index < numberOfDivs) {
+            createDivWithFadeAndColor(); // Call function to create a single div with fade effect and random color
+            index++;
+          } else {
+            clearInterval(interval); // Stop interval when all divs are created
+          }
+        }); // Delay of one second between each div creation
+      }
+
+   
+    </script>
+  </body>
+</html>
